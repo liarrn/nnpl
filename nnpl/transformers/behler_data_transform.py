@@ -69,7 +69,7 @@ class BehlerDataTransform:
         ''' 
         calculate soft cutoff matrix with respect of inter-atom length r
         '''
-        assert self.dist_mat_ != None, 'dis_mat_ should be calculated first'
+        assert isinstance(self.dist_mat_, np.ndarray), 'dis_mat_ should be calculated first'
         rc = self.radial_param_['rc_list'][0]
         self.soft_cutoff_mat_ = np.zeros_like(self.dist_mat_)
         self.soft_cutoff_mat_[self.dist_mat_ <= rc] = 0.5 * (np.cos(np.pi * self.dist_mat_[self.dist_mat_ <= rc] / rc) + 1)
@@ -87,7 +87,7 @@ class BehlerDataTransform:
         '''
         calculate the cosine matrix 
         '''
-        assert self.dist_mat_ != None, 'dis_mat_ should be calculated first'
+        assert isinstance(self.dist_mat_, np.ndarray), 'dis_mat_ should be calculated first'
         N = coor.shape[0]
         self.cos_mat_ = np.empty((N, N, N))
         for i in range(N):
@@ -104,8 +104,8 @@ class BehlerDataTransform:
         '''
         Radial symmetry functions
         '''
-        assert self.dist_mat_ != None, 'dis_mat_ should be calculated first'
-        assert self.soft_cutoff_mat_ != None, 'soft_cutoff_mat_ should be calculated first'
+        assert isinstance(self.dist_mat_, np.ndarray), 'dis_mat_ should be calculated first'
+        assert isinstance(self.soft_cutoff_mat_, np.ndarray), 'soft_cutoff_mat_ should be calculated first'
         args_list = make_grid(self.radial_param_['eta_list'], self.radial_param_['rs_list'], self.radial_param_['rc_list'])
         N = coor.shape[0]
         self.radial_symm_func_ = np.empty((N, len(args_list)))
@@ -122,9 +122,9 @@ class BehlerDataTransform:
         '''
         Angular symmetry functions
         '''
-        assert self.dist_mat_ != None, 'dis_mat_ should be calculated first'
-        assert self.soft_cutoff_mat_ != None, 'soft_cutoff_mat_ should be calculated first'
-        assert self.cos_mat_ != None, 'cos_mat_ should be calculated first'
+        assert isinstance(self.dist_mat_, np.ndarray), 'dis_mat_ should be calculated first'
+        assert isinstance(self.soft_cutoff_mat_, np.ndarray), 'soft_cutoff_mat_ should be calculated first'
+        assert isinstance(self.cos_mat_, np.ndarray), 'cos_mat_ should be calculated first'
         args_list = make_grid(self.angle_param_['eta_list'], self.angle_param_['lambda_list'], 
                               self.angle_param_['zeta_list'], self.angle_param_['rc_list']) 
         N = coor.shape[0]

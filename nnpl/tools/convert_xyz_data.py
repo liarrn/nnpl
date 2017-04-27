@@ -10,9 +10,12 @@ import numpy as np
 sys.path.append('../../')
 from nnpl.transformers.behler_data_transform import BehlerDataTransform
 
-source_file_path = './2-subset.xyz'
-feature_file_path = './2-features.dat'
-label_file_path = './2-labels.dat'
+# source_file_path = './2-subset.xyz'
+# feature_file_path = './2-features.dat'
+# label_file_path = './2-labels.dat'
+source_file_path = './demo.xyz'
+feature_file_path = './demo-features.dat'
+label_file_path = './demo-labels.dat'
 epa = -5758.103436562  # energy per atom
 
 param = {}
