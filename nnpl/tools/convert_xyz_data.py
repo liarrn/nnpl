@@ -30,6 +30,10 @@ with open(source_file_path) as fp:
 print 'time when finished reading xyz data', time.time() - start_time
 ln = 0
 nc = 0
+with open(feature_file_path, 'w') as fp: 
+    pass
+with open(label_file_path, 'w') as lp:
+    pass
 with open(feature_file_path, 'a') as fp:
         with open(label_file_path, 'a') as lp:
             while ln < len(lines):

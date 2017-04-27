@@ -43,6 +43,10 @@ def dt_worker(param, proc_num, outdir = './'):
     print 'proc %d: time when finished reading xyz data %.3f s\n'%(proc_num, time.time() - start_time)
     ln = 0
     nc = 0
+    with open(feature_file_path, 'w') as fp: 
+        pass
+    with open(label_file_path, 'w') as lp:
+        pass
     with open(feature_file_path, 'a') as fp:
         with open(label_file_path, 'a') as lp:
             while ln < len(lines):
@@ -82,6 +86,7 @@ if __name__ == '__main__':
     param['angle'] = {'eta_list':  [0.0003, 0.03, 0.09], 'lambda_list':  [-1.0, 1.0],
                     'zeta_list': [1.0, 2.0, 4.0], 'rc_list': [6.5]}
     
+    start_time = time.time()
     split_xyzfile(xyz_file, nproc, outdir)
     
     proc_list = [None] * nproc
@@ -93,5 +98,5 @@ if __name__ == '__main__':
         proc_list[i].join()
     
     reduce_features(nproc, outdir)
-    
+    print 'total time: %.3f s'%(time.time() - start_time)
     
